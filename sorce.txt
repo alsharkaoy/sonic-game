@@ -1,0 +1,103 @@
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <string>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include "Menu.h" 
+
+
+//using namespace std;
+//using namespace sf;
+
+int main()
+{
+	sf::RenderWindow window(sf::VideoMode(600, 754), "sonic");
+	sf::Texture ture;
+	//ture.loadFromFile("C:/Users/nasse/Desktop/images/new.jpg ");
+	//sf::Sprite player(ture);
+
+	Menu menu(window.getSize().x, window.getSize().y);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Up:
+					menu.moveup();
+					break;
+				case sf::Keyboard::Down:
+					menu.movdown();
+					break;
+				case sf::Keyboard::Return:
+					window.close();
+					switch (menu.mainmenuPressed())
+						/////////////////////////////////////****where are you ********************///////////////////////////
+					{
+					case 0: {//*********************************************************;
+						sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+						sf::CircleShape shape(100.f);
+						shape.setFillColor(sf::Color::Green);
+
+						while (window.isOpen())
+						{
+							sf::Event event;
+							while (window.pollEvent(event))
+							{
+								if (event.type == sf::Event::Closed)
+									window.close();
+							}
+
+							window.clear();
+							window.draw(shape);
+							window.display();
+						}
+						break; }
+					case 1:
+						std::cout << "pressed option" << std::endl;
+						break;
+					case 2:
+						window.close();
+						break;
+					}
+					break;
+				}
+
+						break;
+				
+			case sf::Event::Closed:
+					window.close();
+					break;
+
+			}
+
+		}
+
+
+
+		window.clear();
+		menu.draw(window);
+		//window.draw(player);
+		window.display();
+
+
+
+
+	}
+
+
+
+
+
+
+	return 0;
+
+
+
+
+}
